@@ -1,28 +1,31 @@
 // Set doubleTeam to True for testing
-var doubleTeam = false;
-var currentIndex = 52;
-var angleOrientation;
-var leftVal;
+let doubleTeam = false;
+let currentIndex = 52;
+let angleOrientation;
+let leftVal;
 
-var $allCards = $('div.card');
-var $allCardInputs = $('textarea.card__input');
-var $allCardIndicators = $('svg.indicator');
+const $allCards = $('div.card');
+const $allCardInputs = $('textarea.card__input');
+const $allCardIndicators = $('svg.indicator');
 
-var $white = $('#main-card-white');
-var $whiteInput = $('#main-card-white div textarea.card__input');
-var $whiteIndicator = $('#white-card-indicator');
-var $doubleTeamIndicator = $('#double-team-indicator');
+const $white = $('#main-card-white');
+const $whiteInput = $('#main-card-white div textarea.card__input');
+const $whiteIndicator = $('#white-card-indicator');
+const $doubleTeamIndicator = $('#double-team-indicator');
 
-var $pinkLeft = $('#main-card-pink-left');
-var $pinkLeftInput = $('#main-card-pink-left div textarea.card__input');
-var $pinkLeftIndicator = $('#pink-card-indicator-1');
+const $pinkLeft = $('#main-card-pink-left');
+const $pinkLeftInput = $('#main-card-pink-left div textarea.card__input');
+const $pinkLeftIndicator = $('#pink-card-indicator-1');
 
-var $pinkRight = $('#main-card-pink-right');
-var $pinkRightInput = $('#main-card-pink-right div textarea.card__input');
-var $pinkRightIndicator = $('#pink-card-indicator-2');
+const $pinkRight = $('#main-card-pink-right');
+const $pinkRightInput = $('#main-card-pink-right div textarea.card__input');
+const $pinkRightIndicator = $('#pink-card-indicator-2');
 
-var $cardHeight = $white.height();
-var fiftyPercentHeight = (window.innerHeight / 2) - ($cardHeight / 1.5);
+let $cardHeight = $white.height();
+let fiftyPercentHeight = (window.innerHeight / 2) - ($cardHeight / 1.5);
+
+let currentFocus;
+let typing = false;
 
 /* 'Set the stage on page load' */
 (function() {
@@ -37,6 +40,7 @@ function disableDoubleTeam() {
   $doubleTeamIndicator.removeClass('visible');
   doubleTeam = false;
 }
+
 // Event Handler - on focus forms : Controlling Function
 $allCardInputs.on('focus', function(event) {
   if (!$('svg.indicator[data-card= ' + $(this).attr('data-card') + ']').hasClass('active')) {
@@ -63,6 +67,24 @@ $pinkRightIndicator.on('click', function() {
   } else if (!$(this).hasClass('active')) {
     $('textarea.card__input[data-card= ' + $(this).attr('data-card') + ']').focus();
   }
+});
+
+// Event Handler - on focus to record current focus field
+$('textarea').on('focus', function() {
+  currentFocus = $(this);
+  typing = true;
+  /* Event Handler - on blur to erase current focus field
+  currentFocus.on('blur', function() {
+    typing = false;
+  });
+  */
+});
+
+// Event Handler - on click for adding a space
+$('#add-blank-button').click(function( e ) {
+  e.stopPropagation();
+  console.log(e.isPropagationStopped());
+  addSpace();
 });
 
 // Top level function for setting focused card to front
@@ -240,4 +262,11 @@ function animateCardChange(top, bottom, animateDirection) {
       top: currentTop
     }, 350);
   });
+}
+
+// Add a space
+function addSpace() {
+  // Add space to current position
+  currentFocus[0].value = (currentFocus[0].value + ' _____ ');
+  currentFocus.focus();
 }

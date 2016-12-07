@@ -277,7 +277,7 @@ nav {
   left: 0;
   bottom: 0;
   width: 100%;
-  padding: 0 13.5vw;
+  padding: 0 17.5vw;
   z-index: 250;
 }
 
@@ -325,11 +325,11 @@ nav {
   z-index: 260;
 }
 .button__wrapper.card__submit--wrapper {
-  left: 13.5vw;
+  left: 17.5vw;
   width: 43vw;
 }
 .button__wrapper.add-blank {
-  left: 57.5vw;
+  left: 61.5vw;
   width: 23vw;
 }
 .button__wrapper.space-counter {
@@ -368,7 +368,7 @@ nav {
 }
 .button.card__submit--button {
   position: fixed;
-  left: 15vw;
+  left: 19vw;
   width: 40vw;
 }
 input#submit-cards {
@@ -392,7 +392,7 @@ input#submit-cards {
   fill: rgb(170,170,170);
 }
 #add-blank-button.button {
-  left: 59vw;
+  left: 63vw;
   width: 20vw;
 }
 .button:hover {
